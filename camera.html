@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>카메라 시점 & 구도 가이드</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fafbff;
+  --card:#ffffff;
+  --cam:#4da3ff;
+  --char:#ff7aa2;
+  --line:#e6e9f2;
+  --text:#222;
+  --muted:#666;
+  --radius:20px;
+  --accent:#6c7cff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Gowun Dodum',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ===== NAV ===== */
+.navbar{
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #eee;
+}
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-family:'Jua';
+  font-size:1.3rem;
+  text-decoration:none;
+  color:#222;
+}
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+.nav-menu a{
+  text-decoration:none;
+  color:#666;
+  padding:6px 12px;
+  border-radius:999px;
+  transition:.2s;
+}
+.nav-menu a:hover{
+  background:#e0e5ff;
+  color:#000;
+}
+.nav-menu a.active{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+}
+
+/* ===== HEADER ===== */
+header{
+  padding:90px 20px 60px;
+  text-align:center;
+  background:linear-gradient(135deg,#eaf3ff,#ffeaf1);
+}
+header h1{
+  font-family:'Jua';
+  font-size:2.6rem;
+  margin:0;
+}
+header p{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* ================= LAYOUT ================= */
+section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:60px 20px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:22px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  transition:.25s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 32px rgba(0,0,0,.1);
+}
+
+/* ================= VISUAL ================= */
+.illus{
+  width:100%;
+  height:180px;
+  border-radius:14px;
+  background:#fbfcff;
+  border:1px solid var(--line);
+  position:relative;
+  margin-bottom:16px;
+}
+.cam{
+  position:absolute;
+  width:34px;height:22px;
+  background:var(--cam);
+  border-radius:6px;
+}
+.char{
+  position:absolute;
+  width:22px;height:22px;
+  background:var(--char);
+  border-radius:50%;
+}
+.ray{
+  position:absolute;
+  width:2px;
+  background:rgba(0,0,0,.15);
+}
+
+/* FPS */
+.fps .cam{top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* TPS */
+.tps .cam{top:18px;left:50%;transform:translateX(-50%)}
+.tps .char{bottom:24px;left:50%;transform:translateX(-50%)}
+.tps .ray{top:40px;left:50%;height:90px}
+
+/* TOP */
+.top .cam{top:18px;left:50%;transform:translateX(-50%)}
+.top .char{top:90px;left:50%;transform:translateX(-50%)}
+.top .ray{top:40px;left:50%;height:50px}
+
+/* Composition */
+.thirds::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right,rgba(0,0,0,.12) 1px,transparent 1px) 33% 0/33% 100%,
+    linear-gradient(to right,rgba(0,0,0,.12) 1px,transparent 1px) 66% 0/33% 100%,
+    linear-gradient(to bottom,rgba(0,0,0,.12) 1px,transparent 1px) 0 33%/100% 33%,
+    linear-gradient(to bottom,rgba(0,0,0,.12) 1px,transparent 1px) 0 66%/100% 33%;
+}
+.thirds .char{top:45%;left:65%}
+
+.low .cam{bottom:18px;left:50%;transform:translateX(-50%)}
+.low .char{top:60px;left:50%;transform:translateX(-50%)}
+.low .ray{bottom:40px;left:50%;height:80px}
+
+.high .cam{top:18px;left:50%;transform:translateX(-50%)}
+.high .char{bottom:40px;left:50%;transform:translateX(-50%)}
+.high .ray{top:40px;left:50%;height:80px}
+
+.card h3{
+  font-family:'Jua';
+  font-size:1.3rem;
+  margin:8px 0 6px;
+}
+.card p{
+  font-size:.95rem;
+  color:var(--muted);
+  line-height:1.6;
+}
+.tag{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  font-size:.8rem;
+  border-radius:999px;
+  background:#f1f3f8;
+}
+
+
+/* ===== 설명 카드 ===== */
+.desc-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:36px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+.desc-card h2{
+  font-family:'Jua';
+  font-size:2rem;
+  margin:0 0 16px;
+}
+.desc-card p{
+  font-size:1rem;
+  color:var(--muted);
+  line-height:1.9;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:#888;
+  font-size:.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="logo">GameDesign</a>
+    <ul class="nav-menu">
+      <li><a href="index.html">메인</a></li>
+      <li><a href="genre.html">장르 종류</a></li>
+      <li><a href="#" class="active">카메라 시점</a></li>
+      <li><a href="graphics.html">그래픽 종류</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <h1>🎮 카메라 시점 & 구도 가이드</h1>
+  <p>게임 장르와 연출을 결정하는 시각적 설계</p>
+</header>
+
+<!-- 설명 카드 섹션 -->
+<section>
+  <div class="desc-card">
+    <h2>📌 카메라 구도란 모에요~?</h2>
+    <p>
+      카메라 구도는 플레이어가 게임 세계를 어떻게 인식하고
+      어떤 감정을 느끼게 되는지를 결정하는
+      <strong>게임 연출의 핵심 요소</strong>에요~<br><br>
+      같은 캐릭터와 동일한 환경이라두
+      카메라의 위치, 거리, 각도에 따라
+      액션 게임처럼 느껴질 수도 있고요~
+      전략 게임처럼 차분하게 인식될 수도 있어요~!<br><br>
+      따라서 게임 장르와 플레이 목적에 맞는
+      카메라 시점과 구도를 선택하는 것은
+      게임 디자인에서 매우 중요한 설계 과정인거에요!!!
+    </p>
+  </div>
+</section>
+
+<!-- 카드 예시 섹션 -->
+<section>
+  <div class="grid">
+
+    <div class="card">
+      <div class="illus fps"><div class="cam"></div></div>
+      <h3>1인칭 시점 (FPS)</h3>
+      <p>플레이어의 눈으로 직접 보는 시점이에요~ 조준과 몰입감이 가장 뛰어나답니다~</p>
+      <span class="tag">FPS · 어드벤처</span>
+    </div>
+
+    <div class="card">
+      <div class="illus tps">
+        <div class="cam"></div><div class="char"></div><div class="ray"></div>
+      </div>
+      <h3>3인칭 시점 (TPS)</h3>
+      <p>캐릭터를 뒤에서 바라보는 시점이에요~ 주변 상황 파악이 쉽답니다~</p>
+      <span class="tag">액션 · RPG</span>
+    </div>
+
+    <div class="card">
+      <div class="illus top">
+        <div class="cam"></div><div class="char"></div><div class="ray"></div>
+      </div>
+      <h3>탑뷰</h3>
+      <p>맵 전체를 위에서 내려다보는 시점이에요~ 전략적 플레이에 적합하답니다~</p>
+      <span class="tag">RTS · 전략</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPOSITION -->
+<section>
+  <h2 style="font-family:'Jua';font-size:2rem;margin-bottom:30px;">📐 카메라 구도</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="illus thirds">
+        <div class="cam" style="top:20px;left:50%"></div>
+        <div class="char"></div>
+      </div>
+      <h3>삼등분 구도</h3>
+      <p>가장 안정적이고 자연스러운 화면 배치를 만들어요~</p>
+      <span class="tag">컷신 · 연출</span>
+    </div>
+
+    <div class="card">
+      <div class="illus low">
+        <div class="cam"></div><div class="char"></div><div class="ray"></div>
+      </div>
+      <h3>로우 앵글</h3>
+      <p>아래에서 올려다보며 대상의 위압감을 강조해요~</p>
+      <span class="tag">액션</span>
+    </div>
+
+    <div class="card">
+      <div class="illus high">
+        <div class="cam"></div><div class="char"></div><div class="ray"></div>
+      </div>
+      <h3>하이 앵글</h3>
+      <p>위에서 내려다보며 긴장감과 약함을 표현해요~</p>
+      <span class="tag">공포</span>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © GameDesign Camera Guide
+</footer>
+
+</body>
+</html>
