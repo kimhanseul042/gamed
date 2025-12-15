@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전투 · 액션 중심 — Game Design Guide</title>
+
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Fredoka+One&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== 전체 바디 ===== */
+    :root{
+      --bg:#ffffff;
+      --muted:#6b6b6b;
+      --accent-1:#bae7ff;
+      --accent-2:#ffdfe8;
+      --card-bg:#fffaf9;
+      --card-shadow: 0 10px 18px rgba(30,30,30,0.06);
+      --radius:18px;
+    }
+
+    html,body{height:100%; margin:0; background:var(--bg); font-family:'Gowun Dodum',sans-serif; color:#222;}
+
+    /* ===== 네비게이션 ===== */
+   .navbar{
+  position:sticky;
+  top:0;
+  z-index:120;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-family:'Jua',sans-serif;
+  font-size:1.3rem;
+  color:#333;
+  text-decoration:none;
+}
+
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+
+.nav-menu a{
+  text-decoration:none;
+  color:#666;
+  padding:6px 12px;
+  border-radius:999px;
+  font-weight:500;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover{
+  background:#e0e5ff;
+  color:#000;
+}
+
+
+    /* ===== 헤더 ===== */
+    header{
+      text-align:center; padding:120px 20px 70px;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      border-radius:0 0 28px 28px; margin-bottom:36px;
+    }
+    header h1{margin:0; font-family:'Jua',sans-serif; font-size:2.8rem; color:#19324a;}
+    header p{margin:12px 0 0; color:var(--muted); font-size:1.05rem;}
+
+    /* ===== 컨테이너 ===== */
+    .container{max-width:1100px; margin:0 auto; padding:0 20px;}
+
+    /* ===== 장르 구역 ===== */
+    .genre-section{margin-bottom:80px;}
+    .genre-section h2{
+      font-family:'Jua',sans-serif; font-size:1.9rem; color:#1b2b3a;
+      margin-bottom:14px;
+    }
+    .genre-section p{color:#444; line-height:1.7; margin-bottom:22px;}
+
+    /* ===== 게임 카드 그리드 ===== */
+    .game-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+    @media(max-width:980px){ .game-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .game-grid{grid-template-columns:1fr;} }
+
+    .game-card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:20px 22px;
+      box-shadow:var(--card-shadow);
+      transition:.3s;
+    }
+    .game-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 30px rgba(30,30,30,0.09);
+    }
+
+    .game-card h3{
+      font-family:'Jua',sans-serif;
+      margin-top:0;
+      font-size:1.25rem;
+    }
+    .game-card p{margin:10px 0 0; color:#555; line-height:1.6;}
+
+    footer{ text-align:center; color:var(--muted); padding:36px 20px; font-size:0.95rem; margin-top:60px; }
+  </style>
+</head>
+<body>
+
+  <!-- 네비 -->
+     <nav class="navbar">
+  <div class="nav-inner">
+    <a  class="logo">GameDesign</a>
+    <ul class="nav-menu">
+      <li><a href="index.html">메인</a></li>
+      <li><a href="genre.html">장르 종류</a></li>
+      <li><a href="camera.html"> 카메라 종류</a></li>
+      <li><a href="graphics.html">그래픽 종류</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+  <!-- 헤더 -->
+  <header>
+    <h1>⚔️ 전투 · 액션 중심</h1>
+    <p>누군가를 지키고 싶으면 채팅창 꺼두는 게 좋습니다</p>
+    <p><a href="genre.html">← 장르로 돌아가기</a></p>
+  </header>
+
+  <main class="container">
+
+    <!-- 액션 -->
+    <section class="genre-section">
+      <h2>🎮 액션</h2>
+      <h3>빠른 입력과 타이밍이 중요한 가장 기본적 전투 기반 장르입니다.</h3>
+      <p>아니 이거 억까임;; 보스가 나만 팸;;<p>
+      <div class="game-grid">
+        <div class="game-card"><h3>다크 소울</h3><p>여기선 판정이 나를 패고, 보스가 나를 마무리함</p></div>
+        <div class="game-card"><h3>바이오 하자드</h3><p>좀비보다 탄약이 더 무서운 게 국룰임</p></div>
+        <div class="game-card"><h3>던전 앤 파이터</h3><p>스킬 썼는데 내가 쓴 건지 몬스터가 쓴 건지 모르겠어요</p></div>
+      </div>
+    </section>
+
+    <!-- FPS -->
+    <section class="genre-section">
+      <h2>🔫 FPS </h2>
+      <h3>플레이어 시점에서 빠른 반응속도와 조준 능력이 핵심입니다.</h3>
+      <P>이 정도면 진짜 총알 기부단체임ㄹㅇㅋㅋ</P>
+      <div class="game-grid">
+        <div class="game-card"><h3>콜 오브 듀티</h3><p>스폰되자마자 죽는 것도 실력이냐고요? 네!</p></div>
+        <div class="game-card"><h3>오버워치</h3><p>우리 팀: 이겨야한다 / 상대 팀: 딸깍ㅋㅋ</p></div>
+        <div class="game-card"><h3>둠 시리즈</h3><p>내가 쏘는 건 총알이 아니라 분노임</p></div>
+      </div>
+    </section>
+
+    <!-- TPS -->
+    <section class="genre-section">
+      <h2>🎯 TPS </h2>
+      <h3>캐릭터를 보며 이동, 엄폐, 전술을 활용하는 슈팅 장르입니다.</h3>
+      <p>손님? 슈팅게임에.. 액션을 추가..해보시겠습니까?</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>스플래툰</h3><p>난 열심히 칠했는데..</p></div>
+        <div class="game-card"><h3>파이널 판타지</h3><p>컷신에선 GOAT 내 손에선 걍 JOAT</p></div>
+        <div class="game-card"><h3>포트나이트</h3><p>총 좀 쐇더니 상대가 빌딩 세우는데 이거맞음?</p></div>
+      </div>
+    </section>
+
+    <!-- 레이싱 -->
+    <section class="genre-section">
+      <h2>🏎️ 레이싱</h2>
+      <h3>속도감, 조작감, 반응속도를 경쟁하는 장르.</h3>
+      <p>캐릭터: 어 벽에 박을게~</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>카트라이더</h3><p>막았죠?</p></div>
+        <div class="game-card"><h3>니드 포 스피드</h3><p>브레이크는 장식, 악셀만 믿고 가라</p></div>
+        <div class="game-card"><h3>마리오 카트</h3><p>뭐? 파란껍질을 조심하라고?</p></div>
+      </div>
+    </section>
+
+    <!-- 리듬 -->
+    <section class="genre-section">
+      <h2>🎵 리듬</h2>
+      <h3>음악에 맞춘 타이밍 입력 중심의 장르입니다</h3>
+      <p>곡 난이도는 하드로 골랐는데 난이도는 왜 익스퍼트지..?</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>DJMAX</h3><p>눈이 먼저 죽고 손이 뒤따라 감</p></div>
+        <div class="game-card"><h3>태고의 달인</h3><p>동! 카! 하는데 내 손목이 울음</p></div>
+        <div class="game-card"><h3>프로젝트 세카이</h3><p>미쿠에게 속아 손목을 잃지말자</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Game Design Guide — Joyful Edition
+  </footer>
+
+</body>
+</html>
