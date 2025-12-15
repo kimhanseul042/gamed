@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>장르 카테고리 — Game Design Guide</title>
+
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== 전체 바디 ===== */
+  :root{
+    --bg:#ffffff;
+    --muted:#6b6b6b;
+    --accent-1:#bae7ff;
+    --accent-2:#ffdfe8;
+    --card-bg:#fffaf9;
+    --card-shadow: 0 10px 18px rgba(30,30,30,0.06);
+    --radius:18px;
+  }
+
+  html,body{height:100%; margin:0; background:var(--bg); font-family:'Gowun Dodum',sans-serif; color:#222;}
+
+  /* ===== 네비게이션 ===== */
+  .navbar{
+    position:sticky; top:0; z-index:120; background:rgba(255,255,255,0.95);
+    border-bottom:1px solid #f0f0f0; padding:14px 24px;
+    backdrop-filter: blur(4px);
+  }
+  .nav-inner {
+    max-width:1200px; 
+    margin:0 auto; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between;
+  }
+
+  .logo{
+    font-family:'Fredoka One',sans-serif; 
+    color:#333; 
+    font-size:1.2rem; 
+    text-decoration:none;
+  }
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-family:'Jua';
+  font-size:1.3rem;
+}
+
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+
+.nav-menu a{
+  text-decoration:none;
+  color:#666;
+  padding:6px 12px;
+  border-radius:999px;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover{
+  background:#e0e5ff;
+  color:#000;
+}
+
+
+  /* ===== 헤더 ===== */
+  header{
+    text-align:center; padding:120px 20px 70px;
+    background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    border-radius:0 0 28px 28px; margin-bottom:36px;
+  }
+
+  header h1{
+    margin:0; 
+    font-family:'Jua',sans-serif; 
+    font-size:2.8rem; 
+    color:#19324a;
+  }
+
+  header p{
+    margin:12px 0 0; 
+    color:var(--muted); 
+    font-size:1.05rem;
+  }
+
+  /* ===== 소개 섹션 추가 ===== */
+  #intro {
+    max-width:1100px;
+    margin: 0 auto;
+    padding:20px;
+    margin-bottom:50px;
+  }
+  #intro h2 {
+    font-family:'Jua',sans-serif;
+    font-size:1.8rem;
+    margin-bottom:15px;
+    color:#1b2b3a;
+  }
+  .intro-box {
+    background:#fffaf9;
+    border-radius:18px;
+    padding:22px 26px;
+    line-height:1.7;
+    box-shadow:0 10px 18px rgba(30,30,30,0.06);
+  }
+
+  /* ===== 섹션 컨테이너 ===== */
+  .container{max-width:1100px; margin:0 auto; padding:0 20px;}
+
+  /* ===== 카드 그리드 ===== */
+  .card-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin:12px 0 80px;}
+  @media (max-width:980px){ .card-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){ .card-grid{grid-template-columns:1fr;} }
+
+  /* ===== 카드 ===== */
+  .category-card{
+    display:block; position:relative; overflow:visible;
+    background:var(--card-bg); border-radius:var(--radius);
+    box-shadow:var(--card-shadow); padding:22px; text-decoration:none; color:inherit;
+    transition:transform .28s, box-shadow .28s;
+    min-height:190px; opacity:0; transform:translateY(18px);
+    animation:cardIn .6s forwards;
+  }
+  .category-card:hover{ transform:translateY(-8px); box-shadow:0 20px 30px rgba(30,30,30,0.09); }
+
+  .category-card:nth-child(1){ animation-delay:0.12s; }
+  .category-card:nth-child(2){ animation-delay:0.18s; }
+  .category-card:nth-child(3){ animation-delay:0.24s; }
+  .category-card:nth-child(4){ animation-delay:0.30s; }
+  .category-card:nth-child(5){ animation-delay:0.36s; }
+
+  @keyframes cardIn{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .card-head{display:flex; align-items:center; gap:14px;}
+  .card-emoji{font-size:2.1rem; width:56px; height:56px; display:flex; align-items:center; justify-content:center; border-radius:12px; background:rgba(255,255,255,0.6);}
+  .card-title{font-family:'Jua',sans-serif; font-size:1.25rem; margin:0;}
+  .card-sub{font-size:0.95rem; color:var(--muted); margin-top:8px;}
+
+  .genre-list{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px;}
+  .genre-chip{background:#fff; padding:6px 10px; border-radius:999px; font-size:0.9rem; color:#444; border:1px solid #f1efef;}
+
+  .overlay{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.45));
+    border-radius:var(--radius);
+    opacity:0; pointer-events:none; transition:opacity .28s;
+  }
+  .category-card:hover .overlay{ opacity:1; }
+
+  .overlay-inner{padding:18px; text-align:center; color:#fff; max-width:86%;}
+
+  /* 색감 */
+  .c-combat .card-emoji{background:linear-gradient(135deg,#ffd2d2,#ffdfe0);}
+  .c-narr .card-emoji{background:linear-gradient(135deg,#d3f1ff,#dce8ff);}
+  .c-strat .card-emoji{background:linear-gradient(135deg,#fff2d6,#fff7e6);}
+  .c-sim .card-emoji{background:linear-gradient(135deg,#e6fddf,#f0ffe6);}
+  .c-sandbox .card-emoji{background:linear-gradient(135deg,#f3e6ff,#fdeaff);}
+
+  footer{ text-align:center; color:var(--muted); padding:36px 20px; font-size:0.95rem; }
+</style>
+</head>
+<body>
+
+  <!-- 네비 -->
+  <nav class="navbar">
+  <div class="nav-inner">
+    <a  class="logo">GameDesign</a>
+    <ul class="nav-menu">
+      <li><a href="index.html">메인</a></li>
+      <li><a href="genre.html" class="active">장르 종류</a></li>
+      <li><a href="camera.html"> 카메라 종류</a></li>
+      <li><a href="graphics.html">그래픽 종류</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>🎮 게임 장르 소개</h1>
+    <p><a href="index.html">← 메인으로 돌아가기</a></p>
+  </header>
+
+  <!-- 소개 섹션 -->
+<section id="intro">
+  <h2>게임 장르란건 모에요~?</h2>
+  <div class="intro-box">
+    게임 장르는 플레이어가 경험하게 되는 <strong>게임의 성격을 정의하는 구조</strong>에요<br>
+    액션, RPG, 전략, 퍼즐 등 각각의 장르는<br>
+    플레이 방식과 제공하는 재미가 크게 다르며,<br>
+    게임의 분위기와 디자인 방향까지 결정하게 되는거에요~
+  </div>
+</section>
+
+
+  <!-- 카드 섹션 -->
+  <main class="container" id="categories">
+
+    <div class="card-grid">
+
+      <!-- 1: 전투 & 액션 중심 -->
+      <a class="category-card c-combat" href="combat.html" aria-label="전투 및 액션 카테고리 페이지로 이동">
+        <div class="card-head">
+          <div class="card-emoji">⚔️</div>
+          <div>
+            <p class="card-title">전투 · 액션 중심</p>
+            <p class="card-sub">빠른 반응과 조작을 요구하는 장르들</p>
+          </div>
+        </div>
+
+        <div class="genre-list" aria-hidden="true">
+          <span class="genre-chip">액션</span>
+          <span class="genre-chip">슈팅</span>
+          <span class="genre-chip">FPS</span>
+          <span class="genre-chip">TPS</span>
+          <span class="genre-chip">레이싱</span>
+          <span class="genre-chip">리듬</span>
+        </div>
+
+        <div class="overlay" aria-hidden="true">
+          <div class="overlay-inner">
+            <h4>전투·액션의 특징</h4>
+            <p>손맛, 타이밍, 컨트롤이 핵심입니다. 빠른 피드백과 직관적 조작으로 몰입을 만듭니다.</p>
+          </div>
+        </div>
+      </a>
+
+
+       <!-- 2: 스토리 · 탐험 중심 -->
+      <a class="category-card c-narr" href="story.html" aria-label="스토리 및 탐험 카테고리 페이지로 이동">
+        <div class="card-head">
+          <div class="card-emoji">📖</div>
+          <div>
+            <p class="card-title">스토리 · 탐험 중심</p>
+            <p class="card-sub">이야기·감정·세계관에 집중하는 장르</p>
+          </div>
+        </div>
+
+        <div class="genre-list" aria-hidden="true">
+          <span class="genre-chip">어드벤처</span>
+          <span class="genre-chip">RPG</span>
+          <span class="genre-chip">비주얼 노벨</span>
+          <span class="genre-chip">공포</span>
+          <span class="genre-chip">오픈월드</span>
+        </div>
+
+        <div class="overlay" aria-hidden="true">
+          <div class="overlay-inner">
+            <h4>스토리·탐험의 특징</h4>
+            <p>서사와 감정의 흐름이 중요합니다. 세계를 탐험하며 플레이어 동기를 만드는 것이 핵심입니다.</p>
+          </div>
+        </div>
+      </a>
+
+
+      <!-- 3: 전략 · 두뇌 기반 -->
+      <a class="category-card c-strat" href="strategy.html" aria-label="전략 및 두뇌 기반 카테고리 페이지로 이동">
+        <div class="card-head">
+          <div class="card-emoji">🧠</div>
+          <div>
+            <p class="card-title">전략 · 두뇌 기반</p>
+            <p class="card-sub">계획과 판단, 자원 운영을 중심으로 한 장르</p>
+          </div>
+        </div>
+
+        <div class="genre-list" aria-hidden="true">
+          <span class="genre-chip">전략</span>
+          <span class="genre-chip">SRPG</span>
+          <span class="genre-chip">퍼즐</span>
+          <span class="genre-chip">로그라이크</span>
+        </div>
+
+        <div class="overlay" aria-hidden="true">
+          <div class="overlay-inner">
+            <h4>전략의 특징</h4>
+            <p>결정의 중요성과 선택의 무게를 설계합니다. 리스크와 보상의 균형이 핵심입니다.</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4: 시뮬레이션 · 생활 기반 -->
+      <a class="category-card c-sim" href="simulation.html" aria-label="시뮬레이션 및 생활 기반 카테고리 페이지로 이동">
+        <div class="card-head">
+          <div class="card-emoji">🏡</div>
+          <div>
+            <p class="card-title">시뮬레이션 · 생활</p>
+            <p class="card-sub">현실적 시스템·경영·생활을 모사하는 장르</p>
+          </div>
+        </div>
+
+        <div class="genre-list" aria-hidden="true">
+          <span class="genre-chip">시뮬레이션</span>
+          <span class="genre-chip">스포츠</span>
+          <span class="genre-chip">캐주얼</span>
+        </div>
+
+        <div class="overlay" aria-hidden="true">
+          <div class="overlay-inner">
+            <h4>시뮬레이션의 특징</h4>
+            <p>시스템의 신뢰성과 피드백 루프가 중요합니다. 장기적인 플레이 플로우를 설계하세요.</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5: 창작 · 자유도 기반 -->
+      <a class="category-card c-sandbox" href="sandbox.html" aria-label="창작 및 자유도 기반 카테고리 페이지로 이동">
+        <div class="card-head">
+          <div class="card-emoji">🌿</div>
+          <div>
+            <p class="card-title">창작 · 자유도</p>
+            <p class="card-sub">플레이어의 창조와 탐험을 중심으로 한 장르</p>
+          </div>
+        </div>
+
+        <div class="genre-list" aria-hidden="true">
+          <span class="genre-chip">샌드박스</span>
+          <span class="genre-chip">인디</span>
+        </div>
+
+        <div class="overlay" aria-hidden="true">
+          <div class="overlay-inner">
+            <h4>창작의 특징</h4>
+            <p>도구와 표현의 자유를 제공합니다. 플레이어 주도형 목표가 중요합니다.</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Game Design Guide — Joyful Edition
+  </footer>
+
+</body>
+</html>
