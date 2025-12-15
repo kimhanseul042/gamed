@@ -1,0 +1,255 @@
+<!DOCTYPE html> <!-- 문서 형식 선언: HTML5 문서임을 브라우저에 알림 -->
+<html lang="ko"> <!-- 문서의 기본 언어를 한국어로 설정 -->
+<head> <!-- 문서 메타데이터(문서 제목, 문자셋, 스타일 등)를 넣는 헤드 영역 시작 -->
+<meta charset="UTF-8"> <!-- 문자 인코딩을 UTF-8로 설정 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형을 위한 뷰포트 설정 -->
+<title>게임 디자인 가이드 — Joyful 스타일</title> <!-- 브라우저 탭에 표시될 페이지 제목 -->
+
+<!-- Google Fonts 불러오기: 본문과 제목에 사용할 폰트 링크 -->
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Fredoka+One&display=swap" rel="stylesheet"> <!-- 구글 폰트: Gowun Dodum(본문), Jua(제목) 불러오기 -->
+
+<style> /* 페이지 전반에 적용될 CSS 시작 */
+
+ /* ===== 기본 폰트 & 바디 ===== */ /* 섹션: 바디(페이지 전체) 기본 설정 주석 */
+
+body { /* 바디: 마진 제거, 기본 폰트·배경·글자색·줄간 설정, 스크롤 부드럽게 */
+    margin: 0; 
+    font-family: "Gowun Dodum", sans-serif; 
+    background: #ffffff; 
+    color: #333; 
+    line-height: 1.65; 
+    scroll-behavior: smooth; } 
+
+ /* ===== 네비게이션 ===== */ /* 네비게이션 바 관련 스타일 구역 주석 */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-family:'Jua';
+  font-size:1.3rem;
+}
+
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+
+.nav-menu a{
+  text-decoration:none;
+  color:#666;
+  padding:6px 12px;
+  border-radius:999px;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover{
+  background:#e0e5ff;
+  color:#000;
+}
+
+
+ /* ===== 헤더 ===== */ /* 헤더(상단 큰 비주얼) 관련 스타일 주석 */
+
+header {  /* 헤더: 패딩, 파스텔 그라데이션 배경, 중앙정렬, 하단 둥근 모서리 */
+  padding: 140px 20px; 
+  background: linear-gradient(135deg, #bae7ff, #ffdfe8); 
+  text-align: center; 
+  border-radius: 0 0 30px 30px; }
+
+header h1 { /* 헤더 타이틀: 마진 제거, 크기, 굵기, 색상, 제목 폰트 적용 */
+  margin: 0; 
+  font-size: 3rem; 
+  font-weight: 800; 
+  color: #333; 
+  font-family: 'Jua', sans-serif; } 
+
+header p { /* 헤더 서브텍스트: 위쪽 여백, 크기, 색상 */
+  margin-top: 10px; 
+  font-size: 1.2rem; 
+  color: #555; } 
+
+ /* ===== 공통 섹션 ===== */ /* 페이지 내의 섹션 공통 스타일 주석 */
+
+section { /* 섹션: 중앙 정렬, 흰 배경, 패딩, 둥근 모서리, 그림자, 초기 상태 숨김+아래 이동, 등장 애니메이션 적용 */
+  max-width: 900px; 
+  background: #ffffff; 
+  padding: 60px 40px; 
+  margin: 90px auto; 
+  border-radius: 18px; 
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05); 
+  opacity: 0; 
+  transform: translateY(30px); 
+  animation: fadeUp 0.9s forwards ease-out; } 
+
+#intro { animation-delay: 0.25s; } /* 소개 섹션: 등장 애니메이션 딜레이 설정 */
+
+#core-elements { animation-delay: 0.45s; } /* 핵심 요소 섹션: 등장 애니메이션 딜레이 설정 */
+
+#feature-section { animation-delay: 0.65s; } /* 카드 섹션: 등장 애니메이션 딜레이 설정 */
+
+@keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } } /* fadeUp 키프레임: 아래에서 올라오며 페이드인 */
+
+h2 { /* 섹션 제목 스타일: 크기, 여백, 굵기, 제목 전용 폰트 */
+  font-size: 1.9rem; 
+  margin-bottom: 20px; 
+  font-weight: 700; 
+  font-family: 'Jua', sans-serif; } 
+
+p, ul { font-size: 1.05rem; } /* 단락과 리스트 기본 텍스트 크기 설정 */
+
+ul li { /* 리스트 항목: 아래 여백, 왼쪽 패딩, 상대 위치로 아이콘 배치 여지 */
+  margin-bottom: 10px; 
+  padding-left: 16px; 
+  position: relative; } 
+ul li::before { /* 리스트 마커: 커스텀 점, 색상 파스텔 포인트 */
+  content: "•"; 
+  position: absolute;
+   left: 0; 
+   color: #ff98b8; } 
+
+ /* ===== 카드 섹션 ===== */ /* 카드형 요소 섹션 주석 */
+
+#feature-section { text-align: center; } /* 카드 섹션: 텍스트 중앙 정렬 */
+
+.card-container { /* 카드 컨테이너: 중앙 정렬, 줄바꿈 허용, 카드 간격 */
+  margin-top: 30px; 
+  display: flex; 
+  justify-content: center; 
+  flex-wrap: wrap; 
+  gap: 28px; }
+
+.card { /* 카드 스타일: 배경·둥근 모서리·그림자·전환 */
+  width: 230px; 
+  padding: 20px 20px; 
+  background: #ececf0; 
+  border-radius: 18px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+  position: relative; 
+  cursor: pointer; 
+  transition: 0.3s; } 
+
+.card:hover { transform: translateY(-6px); } /* 카드 호버 시 위로 살짝 이동 */
+
+ /* 오버레이 효과 */ /* 카드 내부 오버레이(설명 박스) 관련 주석 */
+.card .overlay { /* 오버레이 초기 숨김, 중앙 배치, 반투명 배경 */
+  position: absolute; 
+  top: 50%; left: 50%; width: 85%; transform: translate(-50%, -50%); 
+  background: rgba(0,0,0,0.75);
+  padding: 12px; border-radius: 10px; color: #fff; opacity: 0; transition: 0.4s; } 
+
+.card:hover .overlay { opacity: 1; } /* 카드 호버 시 오버레이 보이게 */
+
+ /* ===== 푸터 ===== */ /* 푸터 스타일 주석 */
+footer { padding: 50px 20px; text-align: center; color: #aaa; font-size: 0.9rem; } /* 푸터: 패딩, 중앙 정렬, 색상 및 글자 크기 */
+
+ /* ===== 반응형 ===== */ /* 모바일 대응 스타일 주석 */
+@media (max-width:768px) { section, #feature-section { margin: 20px 10px; padding: 40px 15px; } .card-container { flex-direction: column; align-items: center; } } /* 모바일: 섹션 여백 축소, 카드 열 방향 변경 */
+
+</style> <!-- CSS 끝 -->
+
+</head> <!-- 헤드 영역 끝 -->
+
+<body> <!-- 바디(화면에 표시되는 영역) 시작 -->
+
+  <!-- ===== 네비게이션 ===== --> <!-- 네비게이션 블록 시작 주석 -->
+  <nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">🎮 무어시무어시 있을까용~</div>
+    <ul class="nav-menu">
+      <li><a href="genre.html" class="active">장르 종류</a></li>
+      <li><a href="camera.html">카메라 시점</a></li>
+      <li><a href="graphics.html">그래픽 소개</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- ===== 헤더 ===== --> <!-- 헤더 블록 시작 주석 -->
+  <header> <!-- 페이지 상단 시각적 강조 영역 -->
+    <h1>게임 디자인 구성요소 살펴보기~</h1> <!-- 큰 슬로건 텍스트 -->
+    <p>하나하나 찾아보기 귀찮아서 맘먹고 정리한거시에오</p> <!-- 부제목 / 짧은 설명 -->
+    <img src="images/pixel_character.png" class="hero-character" alt="캐릭터" style="display:none;"> <!-- 헤더 캐릭터 이미지 (현재 display:none: 사용 시 보이게 조정 가능) -->
+  </header> <!-- 헤더 끝 -->
+
+  <!-- ===== 소개 섹션 ===== --> <!-- 소개 섹션 시작 주석 -->
+  <section id="intro"> <!-- 소개 섹션: 게임 디자인 정의 및 간단 설명 -->
+    <h2>게임 디자인이란?</h2> <!-- 섹션 제목 -->
+    <p>게임 디자인은 플레이어가 게임을 통해 경험하는 모든 것을 설계하는 과정이에용</p> <!-- 단락: 정의 한 줄 -->
+    <p>규칙, 보상, 스토리, 시스템 등을 조합하여 플레이어에게 의미 있는 재미를 전달해용</p> <!-- 단락: 추가 설명 -->
+  </section> <!-- 소개 섹션 끝 -->
+
+  <!-- ===== 핵심 요소 섹션 ===== --> <!-- 핵심 요소 블록 시작 주석 -->
+  <section id="core-elements"> <!-- 핵심 요소 섹션: 게임 디자인의 구성 요소 열거 -->
+    <h2>핵심 요소</h2> <!-- 섹션 제목 -->
+    <ul> <!-- 핵심 요소 목록 시작 -->
+      <li>게임 플레이</li> <!-- 목록 항목: 플레이 방식 -->
+      <li>메커닉</li> <!-- 목록 항목: 시스템 규칙 -->
+      <li>레벨 디자인</li> <!-- 목록 항목: 스테이지/맵 설계 -->
+      <li>내러티브</li> <!-- 목록 항목: 스토리텔링 -->
+      <li>UX/UI</li> <!-- 목록 항목: 사용자 경험 및 인터페이스 -->
+    </ul> <!-- 목록 끝 -->
+  </section> <!-- 핵심 요소 섹션 끝 -->
+
+  <!-- ===== 카드 섹션 ===== --> <!-- 카드 섹션 시작 주석 -->
+  <section id="feature-section"> <!-- 주요 요소 카드 섹션: 장르/카메라/그래픽 설명 카드 -->
+    <h2>✨ 게임 디자인의 주요 요소 ✨</h2> <!-- 섹션 제목 -->
+    <div class="card-container"> <!-- 카드 컨테이너: 카드들을 감싸는 그리드 -->
+
+      <a href="genre.html"> <!-- 카드 전체를 링크로 묶음: 장르 상세 페이지로 이동 -->
+        <div class="card"> <!-- 카드: 장르 카드 시작 -->
+          <img src="icon_genre.png" alt="게임 장르 아이콘" style="width:70px;height:70px;margin:0 auto;display:block;"> <!-- 카드 상단 아이콘 이미지 -->
+          <div class="overlay"> <!-- 카드 오버레이: 마우스 호버 시 나타나는 설명 박스 -->
+            <h3 style="margin:0 0 8px 0;">🎲 게임 장르</h3> <!-- 오버레이 제목 -->
+            <p style="margin:0;font-size:0.95rem;">액션, RPG, 시뮬레이션 등 플레이어 경험을 정의하는 핵심이에용!</p> <!-- 오버레이 설명 -->
+          </div> <!-- 오버레이 끝 -->
+        </div> <!-- 카드 끝 -->
+      </a> <!-- 장르 카드 링크 끝 -->
+
+      <a href="camera.html"> <!-- 두번째 카드 링크 시작: 카메라 -->
+        <div class="card"> <!-- 카드: 카메라 카드 시작 -->
+          <img src="images/icon_camera.png" alt="카메라 아이콘" style="width:70px;height:70px;margin:0 auto;display:block;"> <!-- 카드 이미지 -->
+          <div class="overlay"> <!-- 오버레이 박스 -->
+            <h3 style="margin:0 0 8px 0;">🎥 카메라 구도</h3> <!-- 제목 -->
+            <p style="margin:0;font-size:0.95rem;">탑뷰, 사이드뷰, 3D 시점 등 플레이어가 세상을 보는 방식이에용~</p> <!-- 설명 -->
+          </div> <!-- 오버레이 끝 -->
+        </div> <!-- 카드 끝 -->
+      </a> <!-- 카메라 카드 링크 끝 -->
+
+      <a href="graphics.html"> <!-- 세번째 카드 링크 시작: 그래픽 -->
+        <div class="card"> <!-- 카드: 그래픽 카드 시작 -->
+          <img src="images/icon_graphic.png" alt="그래픽 아이콘" style="width:70px;height:70px;margin:0 auto;display:block;"> <!-- 카드 이미지 -->
+          <div class="overlay"> <!-- 오버레이 -->
+            <h3 style="margin:0 0 8px 0;">👁 그래픽 종류</h3> <!-- 제목 -->
+            <p style="margin:0;font-size:0.95rem;">2D, 3D, 픽셀 등 게임의 분위기를 결정해줘요옹</p> <!-- 설명 -->
+          </div> <!-- 오버레이 끝 -->
+        </div> <!-- 카드 끝 -->
+      </a> <!-- 그래픽 카드 링크 끝 -->
+
+    </div> <!-- 카드 컨테이너 끝 -->
+  </section> <!-- 카드 섹션 끝 -->
+
+  <!-- ===== 푸터 ===== --> <!-- 푸터 시작 주석 -->
+  <footer> <!-- 푸터: 사이트 하단 영역 -->
+    <p>© 20251391 DDuDDa tuna</p> <!-- 저작권 표시 텍스트 -->
+  </footer> <!-- 푸터 끝 -->
+
+</body> <!-- 바디 끝 -->
+</html> <!-- HTML 문서 끝 -->
