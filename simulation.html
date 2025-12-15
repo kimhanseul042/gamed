@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>시뮬레이션 · 생활 — Game Design Guide</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Fredoka+One&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --muted:#6b6b6b;
+      --accent-1:#bae7ff;
+      --accent-2:#ffdfe8;
+      --card-bg:#fffdf7;
+      --card-shadow: 0 10px 18px rgba(30,30,30,0.06);
+      --radius:18px;
+    }
+
+    html,body{height:100%; margin:0; background:var(--bg); font-family:'Gowun Dodum',sans-serif; color:#222;}
+
+    .navbar{
+  position:sticky;
+  top:0;
+  z-index:120;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-family:'Jua',sans-serif;
+  font-size:1.3rem;
+  color:#333;
+  text-decoration:none;
+}
+
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+
+.nav-menu a{
+  text-decoration:none;
+  color:#666;
+  padding:6px 12px;
+  border-radius:999px;
+  font-weight:500;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover{
+  background:#e0e5ff;
+  color:#000;
+}
+
+    header{
+      text-align:center; padding:120px 20px 70px;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      border-radius:0 0 28px 28px; margin-bottom:36px;
+    }
+    header h1{margin:0; font-family:'Jua',sans-serif; font-size:2.8rem; color:#19324a;}
+    header p{margin:12px 0 0; color:var(--muted); font-size:1.05rem;}
+
+    .container{max-width:1100px; margin:0 auto; padding:0 20px;}
+
+    .genre-section{margin-bottom:80px;}
+    .genre-section h2{font-family:'Jua',sans-serif; font-size:1.9rem; color:#1b2b3a; margin-bottom:14px;}
+    .genre-section p{color:#444; line-height:1.7; margin-bottom:22px;}
+
+    .game-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+    @media(max-width:980px){ .game-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .game-grid{grid-template-columns:1fr;} }
+
+    .game-card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:20px 22px;
+      box-shadow:var(--card-shadow);
+      transition:.3s;
+    }
+    .game-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 30px rgba(30,30,30,0.09);
+    }
+
+    .game-card h3{font-family:'Jua',sans-serif; margin-top:0; font-size:1.25rem;}
+    .game-card p{margin:10px 0 0; color:#555; line-height:1.6;}
+
+    footer{text-align:center; color:var(--muted); padding:36px 20px; font-size:0.95rem; margin-top:60px;}
+  </style>
+</head>
+<body>
+
+      <nav class="navbar">
+  <div class="nav-inner">
+    <a  class="logo">GameDesign</a>
+    <ul class="nav-menu">
+      <li><a href="index.html">메인</a></li>
+      <li><a href="genre.html">장르 종류</a></li>
+      <li><a href="camera.html"> 카메라 종류</a></li>
+      <li><a href="graphics.html">그래픽 종류</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <header>
+    <h1>🏡 시뮬레이션 · 생활 기반</h1>
+    <p>“현실 도망치려고 게임 켰는데… 여기서도 일함”</p>
+    <p><a href="genre.html">← 장르로 돌아가기</a></p>
+  </header>
+
+  <main class="container">
+
+    <!-- 시뮬레이션 -->
+    <section class="genre-section">
+      <h2>🏡 시뮬레이션</h2>
+      <p>현실을 그대로 가져오거나, 더 빡세거나.</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>심즈 4</h3><p>진짜 내 애도 아닌데 육아스트레스 옴</p></div>
+        <div class="game-card"><h3>시티즈: 스카이라인</h3><p>도로 좀 깔았을 뿐인데 세 시간 지나 있음</p></div>
+        <div class="game-card"><h3>플래닛 주</h3><p>동물 돌보러 왔다가 직원 멘탈 챙기는 게임</p></div>
+      </div>
+    </section>
+
+    <!-- 스포츠 -->
+    <section class="genre-section">
+      <h2>⚽ 스포츠</h2>
+      <p>직접 뛰지 않아도 실제로 운동 되었으면 좋겠다</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>EA FC 24</h3><p>내가 공 차는 게 아니라 내 멘탈이 굴러감</p></div>
+        <div class="game-card"><h3>NBA 2K 시리즈</h3><p>슛은 내가 눌렀는데 왜 골대가 싫어함?</p></div>
+        <div class="game-card"><h3>F1 23</h3><p>브레이크 타이밍 하나로 오늘 운세 결정됨</p></div>
+      </div>
+    </section>
+
+    <!-- 캐주얼 -->
+    <section class="genre-section">
+      <h2>🎈 캐주얼</h2>
+      <p>가볍게 시작했다가 3시간 사라짐.</p>
+      <div class="game-grid">
+        <div class="game-card"><h3>어몽어스</h3><p>교수님이 임포임 내가봤음</p></div>
+        <div class="game-card"><h3>모여봐요 동물의 숲</h3><p>힐링해라 했더니 한국인은 대출부터 갚고있음</p></div>
+        <div class="game-card"><h3>스타듀밸리</h3><p>갈테야 갈테야 펠리컨 마을로 갈테야</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Game Design Guide — Simulation Edition
+  </footer>
+
+</body>
+</html>
